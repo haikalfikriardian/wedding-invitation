@@ -202,6 +202,8 @@ const hotspots = document.querySelectorAll(".hotspot");
 
 hotspots.forEach(h => {
     h.onclick = () => {
+        if (isTutorialActive) return; // Jangan buka modal saat tutorial
+
         const type = h.dataset.type;
 
         switch (type) {
@@ -260,6 +262,167 @@ if (lightBtn) {
 }
 
 // =======================
+// 🎓 TUTORIAL ONBOARDING
+// =======================
+let isTutorialActive = false;
+let tutorialStep = 0;
+
+const tutorialSteps = [
+    {
+        glowClass: 'gallery-glow',
+        emoji: '📸',
+        title: 'Gallery Foto',
+        text: 'Ketuk area ini untuk melihat gallery foto kami',
+        tipTop: '53%', tipLeft: '48%'
+    },
+    {
+        glowClass: 'about-glow',
+        emoji: '💑',
+        title: 'About Us',
+        text: 'Ketuk area ini untuk mengenal perjalanan kisah kami berdua',
+        tipTop: '28%', tipLeft: '3%'
+    },
+    {
+        glowClass: 'bride-glow',
+        emoji: '👰',
+        title: 'Mempelai',
+        text: 'Ketuk area ini untuk melihat informasi mempelai',
+        tipTop: '4%', tipLeft: '52%'
+    },
+    {
+        glowClass: 'place-glow',
+        emoji: '📍',
+        title: 'Lokasi Acara',
+        text: 'Ketuk area ini untuk melihat lokasi pernikahan kami',
+        tipTop: '46%', tipLeft: '2%'
+    },
+    {
+        glowClass: 'dresscode-glow',
+        emoji: '👗',
+        title: 'Dresscode',
+        text: 'Ketuk area ini untuk melihat dresscode acara',
+        tipTop: '69%', tipLeft: '52%'
+    },
+    {
+        glowClass: 'gift-glow',
+        emoji: '🎁',
+        title: 'Wedding Gift',
+        text: 'Ketuk area ini jika kamu ingin memberikan hadiah',
+        tipTop: '57%', tipLeft: '3%'
+    },
+    {
+        glowClass: 'rsvp-glow',
+        emoji: '✉️',
+        title: 'RSVP',
+        text: 'Ketuk area ini untuk konfirmasi kehadiranmu',
+        tipTop: '68%', tipLeft: '50%'
+    },
+];
+
+function startTutorial() {
+    isTutorialActive = true;
+    tutorialStep = 0;
+
+    const tutContainer = document.querySelector('.container');
+
+    // Dark overlay ON
+    overlay.classList.add('active');
+
+    // Tap hint — struktur baru
+    const tapHint = document.createElement('div');
+    tapHint.id = 'tutorialTapHint';
+    tapHint.className = 'tutorial-tap-hint';
+    tapHint.innerHTML = `
+        <span class="tutorial-tap-hint__icon">👆</span>
+        <span class="tutorial-tap-hint__text">Ketuk di mana saja untuk lanjut</span>
+    `;
+    tutContainer.appendChild(tapHint);
+
+    // Skip button
+    const skipBtn = document.createElement('button');
+    skipBtn.id = 'tutorialSkip';
+    skipBtn.className = 'tutorial-skip-btn';
+    skipBtn.textContent = 'Lewati';
+    skipBtn.onclick = (e) => {
+        e.stopPropagation();
+        endTutorial();
+    };
+    tutContainer.appendChild(skipBtn);
+
+    showTutorialStep(0);
+}
+
+function showTutorialStep(index) {
+    const step = tutorialSteps[index];
+    const tutContainer = document.querySelector('.container');
+
+    // Matiin semua glow
+    glowImages.forEach(g => g.classList.remove('glow-on'));
+
+    // Nyalain glow yang aktif
+    const activeGlow = document.querySelector('.' + step.glowClass);
+    if (activeGlow) activeGlow.classList.add('glow-on');
+
+    // Hapus tooltip lama, buat baru (agar animasi selalu re-trigger)
+    const old = document.getElementById('tutorialTooltip');
+    if (old) old.remove();
+
+    const tooltip = document.createElement('div');
+    tooltip.id = 'tutorialTooltip';
+    tooltip.className = 'tutorial-tooltip';
+    tooltip.style.top = step.tipTop;
+    tooltip.style.left = step.tipLeft;
+
+    // Generate progress dots
+    const dots = tutorialSteps.map((_, i) => {
+        let cls = 'tutorial-dot';
+        if (i === index) cls += ' tutorial-dot--active';
+        else if (i < index) cls += ' tutorial-dot--done';
+        return `<span class="${cls}"></span>`;
+    }).join('');
+
+    tooltip.innerHTML = `
+        <div class="tutorial-tooltip__accent"></div>
+        <div class="tutorial-tooltip__body">
+            <div class="tutorial-tooltip__dots">${dots}</div>
+            <span class="tutorial-tooltip__emoji">${step.emoji}</span>
+            <div class="tutorial-tooltip__title">${step.title}</div>
+            <div class="tutorial-tooltip__divider">
+                <span class="tutorial-tooltip__divider-icon">✦</span>
+            </div>
+            <div class="tutorial-tooltip__text">${step.text}</div>
+        </div>
+    `;
+    tutContainer.appendChild(tooltip);
+}
+
+function advanceTutorial() {
+    if (!isTutorialActive) return;
+    tutorialStep++;
+    if (tutorialStep >= tutorialSteps.length) {
+        endTutorial();
+    } else {
+        showTutorialStep(tutorialStep);
+    }
+}
+
+function endTutorial() {
+    isTutorialActive = false;
+
+    // Matiin semua glow
+    glowImages.forEach(g => g.classList.remove('glow-on'));
+
+    // Matiin overlay
+    overlay.classList.remove('active');
+
+    // Hapus semua elemen tutorial
+    ['tutorialTooltip', 'tutorialTapHint', 'tutorialSkip'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+    });
+}
+
+// =======================
 // COPY REKENING
 // =======================
 function copyRekening(id) {
@@ -295,6 +458,9 @@ if (openBtn && loadingScreen) {
         setTimeout(() => {
             loadingScreen.style.display = "none";
         }, 500);
+
+        // Mulai tutorial setelah loading menghilang
+        setTimeout(() => startTutorial(), 700);
     };
 }
 
@@ -377,4 +543,7 @@ document.addEventListener("click", (e) => {
     // --- click sound ---
     clickSfx.currentTime = 0;
     clickSfx.play().catch(() => {});
+
+    // --- advance tutorial ---
+    advanceTutorial();
 });
