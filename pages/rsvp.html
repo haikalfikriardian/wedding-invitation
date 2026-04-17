@@ -1,0 +1,39 @@
+<div class="rsvp-wrapper">
+
+    <h2 class="rsvp-title">Konfirmasi Kehadiran</h2>
+    <p class="rsvp-subtitle">RSVP</p>
+
+    <form id="rsvpForm">
+
+        <input type="text" id="nama" placeholder="Nama Anda" required>
+
+        <select id="kehadiran">
+            <option value="Hadir">Hadir</option>
+            <option value="Tidak Hadir">Tidak Hadir</option>
+        </select>
+
+        <input type="number" id="jumlah" placeholder="Jumlah Tamu" min="1">
+
+        <textarea id="pesan" placeholder="Ucapan & doa..."></textarea>
+
+        <button type="submit">Kirim</button>
+
+    </form>
+
+    <p id="rsvpSuccess" class="hidden">Terima kasih! 💛</p>
+
+    <!-- ========================= -->
+    <!-- 🔥 LIVE RSVP LIST -->
+    <!-- ========================= -->
+
+    <div class="rsvp-list">
+
+        <h3 class="rsvp-list-title">Ucapan & Kehadiran</h3>
+
+        <div id="rsvpData">
+            <!-- DATA DARI GOOGLE SHEET MASUK KE SINI -->
+        </div>
+
+    </div>
+
+</div>

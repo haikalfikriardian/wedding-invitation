@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Undangan Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <h1 class="loading-title">The Wedding of</h1>
+            <h2 class="loading-names">Haikal & Bila</h2>
+
+            <button id="openInvitation" class="open-btn">
+                Open Invitation
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- 💡 LIGHT -->
+        <button id="toggleLight" class="light-btn">
+            <img src="assets/ui/light-button.png" alt="">
+        </button>
+
+        <!-- 🔊 MUSIC -->
+        <button id="musicToggle" class="music-btn">
+            <img id="musicIcon" src="assets/ui/music-button.png" alt="">
+        </button>
+
+        <!-- ❗ HINT -->
+        <button id="hintBtn" class="hint-btn">
+            <img src="assets/ui/hint-button.png" alt="">
+        </button>
+
+        <!-- BACKGROUND -->
+        <video class="background" autoplay loop muted playsinline>
+            <source src="assets/bgvid.mp4" type="video/mp4">
+        </video>
+
+        <!-- OVERLAY GELAP -->
+        <div id="overlay" class="overlay"></div>
+
+        <!-- GLOW IMAGE -->
+        <img src="assets/glow/glow-about.png" class="glow-img about-glow">
+        <img src="assets/glow/glow-gallery.png" class="glow-img gallery-glow">
+        <img src="assets/glow/glow-bride.png" class="glow-img bride-glow">
+        <img src="assets/glow/glow-place.png" class="glow-img place-glow">
+        <img src="assets/glow/glow-dresscode.png" class="glow-img dresscode-glow">
+        <img src="assets/glow/glow-gift.png" class="glow-img gift-glow">
+        <img src="assets/glow/glow-rsvp.png" class="glow-img rsvp-glow">
+
+        <!-- HOTSPOT -->
+        <div class="hotspot about" data-type="about"></div>
+        <div class="hotspot gallery" data-type="gallery"></div>
+        <div class="hotspot bride" data-type="bride"></div>
+        <div class="hotspot place" data-type="place"></div>
+        <div class="hotspot dresscode" data-type="dresscode"></div>
+        <div class="hotspot gift" data-type="gift"></div>
+        <div class="hotspot rsvp" data-type="rsvp"></div>
+
+        <!-- 🔥 LIVE COMMENT -->
+        <div id="liveComments" class="live-comments"></div>
+
+    </div>
+
+    <!-- AUDIO -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="assets/audio/wedding.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close" aria-label="Tutup">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

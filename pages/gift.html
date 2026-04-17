@@ -1,0 +1,92 @@
+<div class="gift-wrapper">
+
+    <h2 class="gift-title">Wedding Gift</h2>
+    <p class="gift-subtitle">DOA &amp; RESTU ANDA ADALAH HADIAH TERBAIK</p>
+
+    <p class="gift-desc">
+        Jika ingin memberikan tanda kasih, Anda dapat mengirimkan melalui rekening berikut:
+    </p>
+
+    <!-- BANK 1 - BLU BCA -->
+    <div class="atm-card atm-card--blu">
+        <div class="atm-card__top">
+            <div class="atm-chip">
+                <div class="atm-chip__line"></div>
+                <div class="atm-chip__line"></div>
+                <div class="atm-chip__line"></div>
+            </div>
+            <img src="assets/bank/blu.png" class="atm-bank-logo" alt="blu BCA">
+        </div>
+
+        <div class="atm-card__number">
+            <span id="rekening1">009611879880</span>
+        </div>
+
+        <div class="atm-card__bottom">
+            <div class="atm-card__info">
+                <span class="atm-label">NAMA PEMILIK</span>
+                <span class="atm-value">SABILA SITI FATEKHA</span>
+            </div>
+            <div class="atm-card__info atm-card__info--right">
+                <span class="atm-label">BANK</span>
+                <span class="atm-value">blu BCA Digital</span>
+            </div>
+        </div>
+
+        <!-- Decorative circles -->
+        <div class="atm-circle atm-circle--1"></div>
+        <div class="atm-circle atm-circle--2"></div>
+
+        <button class="atm-copy-btn" onclick="copyRekening('rekening1')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Salin Nomor
+        </button>
+    </div>
+
+    <!-- BANK 2 - MANDIRI -->
+    <div class="atm-card atm-card--mandiri">
+        <div class="atm-card__top">
+            <div class="atm-chip">
+                <div class="atm-chip__line"></div>
+                <div class="atm-chip__line"></div>
+                <div class="atm-chip__line"></div>
+            </div>
+            <img src="assets/bank/mandiri.png" class="atm-bank-logo" alt="Mandiri">
+        </div>
+
+        <div class="atm-card__number">
+            <span id="rekening2">1800017050644</span>
+        </div>
+
+        <div class="atm-card__bottom">
+            <div class="atm-card__info">
+                <span class="atm-label">NAMA PEMILIK</span>
+                <span class="atm-value">HAIKAL FIKRI ARDIAN</span>
+            </div>
+            <div class="atm-card__info atm-card__info--right">
+                <span class="atm-label">BANK</span>
+                <span class="atm-value">Bank Mandiri</span>
+            </div>
+        </div>
+
+        <!-- Decorative circles -->
+        <div class="atm-circle atm-circle--1"></div>
+        <div class="atm-circle atm-circle--2"></div>
+
+        <button class="atm-copy-btn" onclick="copyRekening('rekening2')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Salin Nomor
+        </button>
+    </div>
+
+    <!-- QRIS -->
+    <div class="gift-qris">
+        <p class="qris-title">Atau Scan QRIS</p>
+        <img src="assets/qris.png" class="qris-img">
+    </div>
+
+</div>

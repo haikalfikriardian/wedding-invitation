@@ -1,0 +1,1311 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* CONTAINER */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+}
+
+/* BACKGROUND */
+.background {
+    width: 100%;
+    display: block;
+}
+
+/* OVERLAY */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.overlay.active {
+    opacity: 1;
+}
+
+/* HOTSPOT */
+.hotspot {
+    position: absolute;
+    background: transparent;
+    cursor: pointer;
+    z-index: 5;
+}
+
+/* ========================= */
+/* POSISI + SIZE */
+/* ========================= */
+
+.about,
+.about-glow {
+    top: 5.5%;
+    left: 0.5%;
+    width: 52%;
+    height: 22%;
+}
+
+.gallery,
+.gallery-glow {
+    top: 1.5%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+}
+
+/* NEW */
+.bride,
+.bride-glow {
+    top: 27.1%;
+    left: 11.7%;
+    width: 82.7%;
+    height: 42%;
+}
+
+/* NEW */
+.place,
+.place-glow {
+    top: 29.5%;
+    left: 0.01%;
+    width: 30%;
+    height: 16%;
+}
+
+.gift,
+.gift-glow {
+    top: 60.5%;
+    left: 0.5%;
+    width: 55%;
+    height: 26%;
+}
+
+.rsvp,
+.rsvp-glow {
+    top: 72%;
+    left: 56%;
+    width: 43.5%;
+    height: 18%;
+}
+
+.dresscode,
+.dresscode-glow {
+    top: 47%;
+    left: 56.5%;
+    width: 43%;
+    height: 22%;
+}
+
+/* ========================= */
+/* GLOW IMAGE */
+/* ========================= */
+
+.glow-img {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 3;
+    height: auto;
+}
+
+@keyframes glowPulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+}
+
+.glow-on {
+    opacity: 1;
+    animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+.bride-glow.glow-on {
+    animation: none;
+}
+
+/* ========================= */
+/* TOMBOL */
+/* ========================= */
+
+.light-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+    transition: 0.2s;
+}
+
+.light-btn:active {
+    transform: scale(0.9);
+}
+
+/* 🔥 TOMBOL MUSIK */
+.music-btn {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+
+    z-index: 10;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+    transition: 0.2s;
+}
+
+.music-btn:active {
+    transform: scale(0.9);
+}
+
+/* ========================= */
+/* MODAL */
+/* ========================= */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+
+    z-index: 99;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #f5e9dc;
+    padding: 20px;
+    width: 90%;
+    max-width: 360px;
+
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    position: relative;
+
+    animation: popupIn 0.3s ease;
+
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+/* tombol close */
+.close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+
+    border: none;
+    background: rgba(160, 92, 77, 0.12);
+    color: #a05c4d;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, color 0.2s;
+    z-index: 10;
+    padding: 0;
+    line-height: 1;
+}
+
+.close:hover {
+    background: #a05c4d;
+    color: #fff;
+    transform: scale(1.1) rotate(90deg);
+}
+
+/* animasi */
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ========================= */
+/* ISI MODAL */
+/* ========================= */
+
+#modal-body {
+    overflow-y: auto;
+    max-height: 70vh;
+    padding-right: 8px;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #c9956b #f0e6d8;
+}
+
+/* Chrome / Safari / Edge */
+#modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+#modal-body::-webkit-scrollbar-track {
+    background: #f0e6d8;
+    border-radius: 10px;
+}
+
+#modal-body::-webkit-scrollbar-thumb {
+    background: #c9956b;
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+#modal-body::-webkit-scrollbar-thumb:hover {
+    background: #a05c4d;
+}
+
+#modal-body p {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+
+#modal-body input,
+#modal-body select,
+#modal-body textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+#modal-body button {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background: #a05c4d;
+    color: white;
+    cursor: pointer;
+}
+
+/* ========================= */
+/* LOADING SCREEN */
+/* ========================= */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(135deg, #f5e9dc, #e8d8c3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+}
+
+.loading-content {
+    text-align: center;
+    animation: fadeIn 1s ease;
+}
+
+.loading-title {
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: #8b5e4c;
+    margin-bottom: 10px;
+}
+
+.loading-names {
+    font-size: 28px;
+    color: #9a3d3f;
+    margin-bottom: 30px;
+}
+
+.open-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+
+    background: #a05c4d;
+    color: white;
+    font-size: 14px;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.open-btn:hover {
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hide-loading {
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+/* ========================= */
+/* 🔥 RSVP LIVE LIST */
+/* ========================= */
+
+.rsvp-list {
+    margin-top: 25px;
+    text-align: left;
+}
+
+.rsvp-list-title {
+    font-size: 14px;
+    color: #9a3d3f;
+    margin-bottom: 10px;
+}
+
+/* item */
+.rsvp-item {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* nama */
+.rsvp-item strong {
+    display: block;
+    color: #333;
+}
+
+/* pesan */
+.rsvp-item p {
+    font-size: 13px;
+    margin: 4px 0;
+    text-align: left;
+}
+
+/* status */
+.rsvp-item small {
+    font-size: 11px;
+    color: #777;
+}
+
+/* ========================= */
+/* 🔥 LIVE COMMENT FLOATING */
+/* ========================= */
+
+.live-comments {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 8;
+}
+
+/* bubble komentar */
+.comment-bubble {
+    position: absolute;
+    right: -100%;
+
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px 12px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    white-space: nowrap;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    animation: slideComment 12s linear forwards;
+}
+
+/* animasi jalan kanan → kiri */
+@keyframes slideComment {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-150vw);
+    }
+}
+
+/* ========================= */
+/* GALLERY PINTEREST STYLE   */
+/* ========================= */
+
+.gallery-wrapper {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.gallery-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.gallery-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #a05c4d;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px !important;
+}
+
+/* Grid ala Pinterest dengan CSS Columns */
+.gallery-grid {
+    column-count: 2;
+    column-gap: 10px;
+    padding: 0 5px;
+}
+
+.gallery-item {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    /* rounded Pinterest */
+    display: block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+}
+
+/* Lightbox Styling jika diklik */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.lightbox.hidden {
+    display: none;
+}
+
+#lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+/* ========================= */
+/* ABOUT US STYLE            */
+/* ========================= */
+
+.about-wrapper {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.about-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #a05c4d;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px !important;
+}
+
+/* Couple Container */
+.about-couple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.person img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
+}
+
+.person p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #8b5e4c;
+    margin: 0 !important;
+}
+
+.love-icon {
+    font-size: 24px;
+    color: #d14141;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+/* Quote */
+.about-quote {
+    font-style: italic;
+    font-size: 13px !important;
+    text-align: center !important;
+    line-height: 1.6;
+    color: #555 !important;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border-left: 4px solid #a05c4d;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding-left: 10px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+/* Vertical line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 5px;
+    bottom: 0;
+    width: 2px;
+    background: #d8c2aa;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 25px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item .dot {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: #a05c4d;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #d8c2aa;
+    z-index: 1;
+}
+
+.timeline-item .content span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #a05c4d;
+    display: block;
+}
+
+.timeline-item .content p {
+    font-size: 14px !important;
+    color: #333 !important;
+    text-align: left !important;
+    margin: 2px 0 0 0 !important;
+}
+
+/* ========================= */
+/* GIFT STYLE                */
+/* ========================= */
+
+.gift-wrapper {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.gift-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.gift-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #a05c4d;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px !important;
+}
+
+.gift-desc {
+    font-size: 13px !important;
+    line-height: 1.5;
+    color: #555 !important;
+    margin-bottom: 25px !important;
+}
+
+/* ========================= */
+/* ATM CARD                  */
+/* ========================= */
+
+.atm-card {
+    position: relative;
+    border-radius: 18px;
+    padding: 22px 22px 18px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    text-align: left;
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.atm-card:hover {
+    transform: translateY(-4px) rotate(-0.5deg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* BLU BCA - tosca/teal gradient */
+.atm-card--blu {
+    background: linear-gradient(135deg, #1a6b6b 0%, #0eb8b8 50%, #5fd8c8 100%);
+    box-shadow: 0 12px 35px rgba(14, 184, 184, 0.4);
+}
+
+/* Mandiri - navy/gold gradient */
+.atm-card--mandiri {
+    background: linear-gradient(135deg, #002f6c 0%, #004a99 55%, #1565c0 100%);
+    box-shadow: 0 12px 35px rgba(0, 47, 108, 0.45);
+}
+
+/* Glossy sheen overlay */
+.atm-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+    border-radius: 18px 18px 0 0;
+    pointer-events: none;
+}
+
+/* Decorative circles (like Visa/Mastercard circles) */
+.atm-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.atm-circle--1 {
+    width: 130px;
+    height: 130px;
+    right: -30px;
+    top: -30px;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.atm-circle--2 {
+    width: 90px;
+    height: 90px;
+    right: 40px;
+    top: -45px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Top row — chip + logo */
+.atm-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* EMV Chip */
+.atm-chip {
+    width: 42px;
+    height: 32px;
+    background: linear-gradient(135deg, #e8c96a, #f5e09a, #c8a84b);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 6px 5px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.atm-chip__line {
+    height: 2px;
+    background: rgba(160, 120, 30, 0.5);
+    border-radius: 1px;
+}
+
+/* Bank logo on card */
+.atm-bank-logo {
+    height: 28px;
+    max-width: 90px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.92;
+}
+
+/* Card number */
+.atm-card__number {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    word-break: break-all;
+}
+
+/* Bottom row */
+.atm-card__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+
+.atm-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.atm-card__info--right {
+    text-align: right;
+}
+
+.atm-label {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+}
+
+.atm-value {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.5px;
+}
+
+/* Copy button */
+.atm-copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.atm-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+}
+
+.atm-copy-btn:active {
+    transform: scale(0.97);
+}
+
+/* QRIS Section */
+.gift-qris {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0e6d2;
+    margin-top: 30px;
+}
+
+.qris-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #a05c4d;
+    margin-bottom: 15px !important;
+}
+
+.qris-img {
+    width: 60%;
+    max-width: 180px;
+    border-radius: 12px;
+    border: 3px solid #eee;
+    padding: 5px;
+}
+
+/* ========================= */
+/* RSVP STYLE OVERRIDE       */
+/* ========================= */
+
+.rsvp-wrapper {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.rsvp-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.rsvp-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #a05c4d;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px !important;
+}
+
+/* Form Styles Override */
+#rsvpForm input,
+#rsvpForm select,
+#rsvpForm textarea {
+    width: 100%;
+    box-sizing: border-box;
+    /* Agar padding gak bikin overlap */
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    margin-top: 0 !important;
+    border-radius: 12px !important;
+    border: 1px solid #e0d5c1 !important;
+    background: #fff !important;
+    font-size: 14px;
+    color: #333;
+    font-family: inherit;
+    outline: none;
+    transition: 0.3s;
+}
+
+#rsvpForm textarea {
+    min-height: 80px;
+    resize: none;
+}
+
+#rsvpForm input:focus,
+#rsvpForm select:focus,
+#rsvpForm textarea:focus {
+    border-color: #a05c4d !important;
+    box-shadow: 0 0 5px rgba(160, 92, 77, 0.2);
+}
+
+#rsvpForm button {
+    margin-top: 5px !important;
+    width: 100%;
+    padding: 12px !important;
+    border-radius: 20px !important;
+    border: none;
+    background: #a05c4d !important;
+    color: white !important;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(160, 92, 77, 0.3);
+}
+
+#rsvpForm button:hover {
+    background: #8b4e40 !important;
+    transform: translateY(-2px);
+}
+
+/* Success Message */
+#rsvpSuccess {
+    margin-top: 15px;
+    color: #a05c4d;
+    /* Gunakan warna theme */
+    font-weight: bold;
+    animation: fadeIn 0.5s ease;
+}
+
+/* RSVP Live List Enhancements */
+.rsvp-list {
+    margin-top: 30px !important;
+    text-align: left;
+    border-top: 1px dashed #d8c2aa;
+    padding-top: 20px;
+}
+
+.rsvp-list-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px !important;
+    font-weight: 600;
+    color: #333 !important;
+    margin-bottom: 15px !important;
+    text-align: center;
+}
+
+.rsvp-item {
+    background: #fff !important;
+    padding: 15px !important;
+    border-radius: 12px !important;
+    margin-bottom: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    border-left: 4px solid #deb887 !important;
+    /* Warna aksen gold/sand */
+    position: relative;
+    text-align: left;
+}
+
+.rsvp-item strong {
+    font-size: 14px;
+    color: #333;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.rsvp-item p {
+    font-size: 13px !important;
+    color: #555 !important;
+    margin: 5px 0 10px 0 !important;
+    line-height: 1.4 !important;
+    font-style: italic;
+    background: #fdfaf5;
+    /* Background sangat tipis */
+    padding: 8px 10px;
+    border-radius: 8px;
+    text-align: left !important;
+}
+
+.rsvp-item small {
+    display: block;
+    font-size: 11px !important;
+    color: #a05c4d !important;
+    /* Warna terracotta */
+    text-align: right;
+    font-weight: bold;
+}
+
+/* ========================= */
+/* DRESSCODE STYLE OVERRIDE  */
+/* ========================= */
+
+.dress-wrapper {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.dress-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.dress-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #a05c4d;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px !important;
+}
+
+.dress-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0d5c1;
+    margin-top: 10px;
+}
+
+.dress-icon {
+    font-size: 45px;
+    margin-bottom: 20px;
+    animation: floating 3s ease-in-out infinite;
+}
+
+.dress-desc {
+    font-size: 14px !important;
+    line-height: 1.6;
+    color: #555 !important;
+    margin: 0 !important;
+}
+
+.dress-desc strong {
+    font-size: 16px;
+    color: #8b5e4c;
+    /* Warna tema teks lebih gelap */
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* ========================= */
+/* 🔥 BUTTON IMAGE STYLE */
+/* ========================= */
+
+.light-btn img,
+.music-btn img {
+    transition: 0.2s;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.music-btn:active img {
+    transform: scale(0.85);
+}
+
+.hint-btn img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    border-radius: 0;
+    display: block;
+}
+
+/* posisi hint button */
+.hint-btn {
+    position: absolute;
+    top: 10px;
+    left: 110px;
+    /* sebelah music */
+
+    z-index: 10;
+
+    height: 40px;
+    width: auto;
+    padding: 0;
+    border-radius: 999px;
+    overflow: hidden;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hint-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.hint-btn:active {
+    transform: scale(0.95);
+}
+
+/* ========================= */
+/* 💬 HINT IMAGE BUBBLE */
+/* ========================= */
+
+.hint-image-bubble {
+    position: absolute;
+    top: 55px;
+    /* Sedikit di bawah deretan tombol */
+    left: 4px;
+    /* Posisi awal di bawah lampu */
+    width: 145px;
+    /* Lebar image popup */
+
+    z-index: 1000;
+    pointer-events: none;
+    /* Biar tap area di bawahnya (kalau pas mau tutup) tetep nembus */
+
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.3s ease;
+}
+
+/* state animasi muncul */
+.hint-image-bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================= */
+/* 💧 RIPPLE TOUCH EFFECT    */
+/* ========================= */
+
+.ripple-effect {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(160, 92, 77, 0.6);
+    background: rgba(160, 92, 77, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+    z-index: 99999;
+    animation: rippleAnim 0.55s ease-out forwards;
+}
+
+@keyframes rippleAnim {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+    }
+}
