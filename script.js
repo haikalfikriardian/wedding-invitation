@@ -273,7 +273,7 @@ const tutorialSteps = [
         emoji: '📸',
         title: 'Gallery Foto',
         text: 'Ketuk area ini untuk melihat gallery foto kami',
-        tipTop: '53%', tipLeft: '48%'
+        tipTop: '28%', tipLeft: '48%'
     },
     {
         glowClass: 'about-glow',
@@ -315,7 +315,7 @@ const tutorialSteps = [
         emoji: '✉️',
         title: 'RSVP',
         text: 'Ketuk area ini untuk konfirmasi kehadiranmu',
-        tipTop: '68%', tipLeft: '50%'
+        tipTop: '60%', tipLeft: '54%'
     },
 ];
 
