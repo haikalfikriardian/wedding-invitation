@@ -35,7 +35,21 @@ body {
 .background {
     width: 100%;
     display: block;
+    /* Hapus kontrol native video di mobile */
+    pointer-events: none;
 }
+
+/* Sembunyikan play button dan native controls Safari/Chrome mobile */
+.background::-webkit-media-controls,
+.background::-webkit-media-controls-panel,
+.background::-webkit-media-controls-play-button,
+.background::-webkit-media-controls-start-playback-button,
+.background::-webkit-media-controls-overlay-play-button {
+    display: none !important;
+    opacity: 0 !important;
+    -webkit-appearance: none !important;
+}
+
 
 /* OVERLAY */
 .overlay {

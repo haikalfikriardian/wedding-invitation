@@ -444,6 +444,12 @@ const musicIcon = document.getElementById("musicIcon");
 if (openBtn && loadingScreen) {
     openBtn.onclick = () => {
 
+        // Play video BG — wajib dipanggil setelah user interaction di mobile
+        const bgVideo = document.querySelector('.background');
+        if (bgVideo) {
+            bgVideo.play().catch(() => {});
+        }
+
         if (bgMusic && musicIcon) {
             bgMusic.volume = 0.3;
             bgMusic.play().then(() => {
