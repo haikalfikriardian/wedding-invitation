@@ -1471,9 +1471,8 @@ body {
     padding: 8px 20px;
     border-radius: 30px;
     font-size: 12px;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    letter-spacing: 0.5px;
+    font-family: sans-serif;
+    letter-spacing: 0.3px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
@@ -1515,9 +1514,8 @@ body {
 
 .tutorial-tap-hint__text {
     font-size: 11px;
-    color: rgba(255, 240, 220, 0.75);
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
+    color: rgba(255, 240, 220, 0.85);
+    font-family: sans-serif;
     background: rgba(0, 0, 0, 0.2);
     padding: 4px 12px;
     border-radius: 20px;
