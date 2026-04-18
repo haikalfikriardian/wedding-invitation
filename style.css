@@ -35,6 +35,8 @@ body {
 .background {
     width: 100%;
     display: block;
+    /* Mencegah layar hitam (safety net) */
+    background: url('assets/bg.png') center/cover no-repeat;
     /* Hapus kontrol native video di mobile */
     pointer-events: none;
 }
