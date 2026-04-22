@@ -423,6 +423,36 @@ function endTutorial() {
 }
 
 // =======================
+// CUSTOM TOAST NOTIFICATION
+// =======================
+function showToast(message) {
+    // Hapus toast lama kalau masih ada
+    const existing = document.getElementById('copyToast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'copyToast';
+    toast.className = 'copy-toast';
+    toast.innerHTML = `
+        <span class="copy-toast__icon">✓</span>
+        <span class="copy-toast__text">${message}</span>
+    `;
+
+    document.body.appendChild(toast);
+
+    // Trigger animasi masuk
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => toast.classList.add('copy-toast--show'));
+    });
+
+    // Auto hilang setelah 2.5 detik
+    setTimeout(() => {
+        toast.classList.remove('copy-toast--show');
+        toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+    }, 2500);
+}
+
+// =======================
 // COPY REKENING
 // =======================
 function copyRekening(id) {
@@ -430,7 +460,7 @@ function copyRekening(id) {
     if (!el) return;
 
     navigator.clipboard.writeText(el.innerText)
-        .then(() => alert("Nomor rekening berhasil disalin!"));
+        .then(() => showToast('Nomor Rekening Berhasil di Copy'));
 }
 
 // =======================
