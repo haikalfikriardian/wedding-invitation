@@ -14,26 +14,39 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     min-height: 100vh;
     min-height: 100dvh;
     background: #1a1a1a;
-    overflow-x: hidden;
-}
-
-/* CONTAINER */
-.container {
-    position: relative;
-    width: 100%;
-    max-width: 430px;
-    min-height: 100vh;
-    min-height: 100dvh;
     overflow: hidden;
 }
 
-/* BACKGROUND */
+/* CONTAINER — dikunci ke aspect ratio background agar posisi glow selalu akurat di semua ukuran layar */
+.container {
+    position: relative;
+    /* Tinggi container selalu = tinggi layar (dvh), lebar mengikuti aspect-ratio 9:16 */
+    /* Ini memastikan semua % top/left selalu konsisten di semua HP, termasuk Samsung */
+    height: 100vh;
+    height: 100dvh;
+    width: auto;
+    /* Lebar otomatis dari aspect-ratio, max 430px */
+    max-width: 430px;
+    /* Kunci rasio ke rasio asli bg.png: 1080×1920 = 9:16 */
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    flex-shrink: 0;
+    /* Center jika ada sisa space horizontal */
+    margin: 0 auto;
+}
+
+/* BACKGROUND — selalu cover penuh container */
 .background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
     /* Mencegah layar hitam (safety net) */
     background: url('assets/bg.png') center/cover no-repeat;
