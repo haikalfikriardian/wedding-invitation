@@ -583,3 +583,116 @@ document.addEventListener("click", (e) => {
     // --- advance tutorial ---
     advanceTutorial();
 });
+
+// =======================
+// 🎬 CREDIT SCENE
+// =======================
+(function () {
+    const overlay  = document.getElementById('creditOverlay');
+    const content  = document.getElementById('creditScrollContent');
+    const closeBtn = document.getElementById('creditCloseBtn');
+
+    if (!overlay || !content || !closeBtn) return;
+
+    const SPEED = 55; // px per detik
+    let isScrolling = false;
+    let isPaused    = false;
+
+
+    // ── Reset ke posisi awal ──
+    function resetScroll() {
+        content.style.transition = 'none';
+        content.style.transform  = 'translateY(0)';
+        isScrolling = false;
+        isPaused    = false;
+    }
+
+    // ── Ambil nilai translateY saat ini dari computed style ──
+    function getCurrentY() {
+        const matrix = window.getComputedStyle(content).transform;
+        if (!matrix || matrix === 'none') return 0;
+        return new DOMMatrix(matrix).m42; // m42 = translateY
+    }
+
+    // ── Mulai scroll dari posisi saat ini ──
+    function startScrollFrom(currentY) {
+        const targetY  = -content.scrollHeight;
+        const distance = Math.abs(targetY - currentY);
+        const duration = distance / SPEED;
+
+        // Paksa reflow agar transition tidak langsung di-skip
+        content.getBoundingClientRect();
+
+        content.style.transition = `transform ${duration}s linear`;
+        content.style.transform  = `translateY(${targetY}px)`;
+        isScrolling = true;
+    }
+
+    // ── Pause: freeze di posisi sekarang ──
+    function pauseScroll() {
+        if (!isScrolling || isPaused) return;
+        const currentY = getCurrentY();
+        content.style.transition = 'none';
+        content.style.transform  = `translateY(${currentY}px)`;
+        isPaused = true;
+    }
+
+    // ── Resume: lanjut dari posisi beku ──
+    function resumeScroll() {
+        if (!isPaused) return;
+        isPaused = false;
+        const currentY = getCurrentY();
+        // Pakai requestAnimationFrame agar transition terapply setelah 'none'
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => startScrollFrom(currentY));
+        });
+    }
+
+    // ── Buka overlay & mulai ──
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('#readStoryBtn')) {
+            e.stopPropagation();
+            resetScroll();
+            overlay.classList.remove('hidden');
+            setTimeout(() => startScrollFrom(0), 500);
+        }
+    });
+
+    // ── Tutup overlay ──
+    closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        overlay.classList.add('hidden');
+        resetScroll();
+    });
+
+    // ── Touch: tahan = pause, lepas = resume ──
+    overlay.addEventListener('touchstart', function (e) {
+        // Jangan pause kalau yang ditekan adalah tombol close
+        if (e.target.closest('#creditCloseBtn')) return;
+        pauseScroll();
+    }, { passive: true });
+
+    overlay.addEventListener('touchend', function (e) {
+        if (e.target.closest('#creditCloseBtn')) return;
+        resumeScroll();
+    }, { passive: true });
+
+    overlay.addEventListener('touchcancel', function () {
+        resumeScroll();
+    }, { passive: true });
+
+    // ── Mouse: tahan = pause, lepas = resume (untuk desktop/emulator) ──
+    overlay.addEventListener('mousedown', function (e) {
+        if (e.target.closest('#creditCloseBtn')) return;
+        pauseScroll();
+    });
+
+    overlay.addEventListener('mouseup', function (e) {
+        if (e.target.closest('#creditCloseBtn')) return;
+        resumeScroll();
+    });
+
+    overlay.addEventListener('mouseleave', function () {
+        resumeScroll();
+    });
+})();

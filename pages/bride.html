@@ -1,34 +1,76 @@
-<div class="about-wrapper">
+<div class="bride-modal-wrapper">
 
-    <h2 class="about-title">Bride & Groom</h2>
-    <p class="about-subtitle">THE HAPPY COUPLE</p>
+    <!-- Dekorasi bunga pojok kiri atas -->
+    <div class="bride-floral bride-floral--tl">🌸🌿</div>
+    <!-- Dekorasi bunga pojok kanan atas -->
+    <div class="bride-floral bride-floral--tr">🌿🌸</div>
 
-    <!-- FOTO COUPLE -->
-    <div class="about-couple">
+    <!-- Header -->
+    <h2 class="bride-main-title">Bride &amp; Groom</h2>
+    <div class="bride-subtitle-banner">
+        <span>THE HAPPY COUPLE</span>
+    </div>
 
-        <div class="person">
-            <img src="assets/bride/haikal.png" alt="Haikal">
-            <p>Haikal</p>
+    <!-- Foto Couple -->
+    <div class="bride-couple-row">
+
+        <div class="bride-person">
+            <div class="bride-photo-frame">
+                <img src="assets/bride/haikal.png" alt="Haikal">
+                <div class="bride-frame-flowers">🌸🌿</div>
+            </div>
+            <p class="bride-person-name">Haikal</p>
         </div>
 
-        <div class="love-icon">❤</div>
+        <!-- Hati tengah -->
+        <div class="bride-center-heart">❤</div>
 
-        <div class="person">
-            <img src="assets/bride/bila.png" alt="Bila">
-            <p>Bila</p>
+        <div class="bride-person">
+            <div class="bride-photo-frame">
+                <img src="assets/bride/bila.png" alt="Bila">
+                <div class="bride-frame-flowers">🌿🌸</div>
+            </div>
+            <p class="bride-person-name">Bila</p>
         </div>
 
     </div>
 
-    <!-- QUOTE -->
-    <p class="about-quote">
-        “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri,
-        agar kamu merasa tenteram kepadanya.”
+    <!-- Quote Box -->
+    <div class="bride-quote-box">
+        <span class="bride-quote-mark bride-quote-mark--open">"</span>
+        <p class="bride-quote-text">
+            "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu merasa tenteram kepadanya."
+        </p>
+        <span class="bride-quote-mark bride-quote-mark--close">"</span>
+    </div>
+
+    <!-- Separator -->
+    <div class="bride-separator">
+        <span class="bride-sep-line"></span>
+        <span class="bride-sep-heart">❤</span>
+        <span class="bride-sep-line"></span>
+    </div>
+
+    <!-- Teks undangan -->
+    <p class="bride-invite-text">
+        Dengan penuh kebahagiaan kami mengundang Anda<br>untuk menjadi bagian dari hari spesial kami.
     </p>
 
-    <!-- TEXT -->
-    <p style="font-size:14px; color:#555;">
-        Dengan penuh kebahagiaan kami mengundang Anda untuk menjadi bagian dari hari spesial kami.
-    </p>
+    <!-- Dekorasi bunga pojok kiri bawah -->
+    <div class="bride-floral bride-floral--bl">🌸🌿</div>
+    <!-- Dekorasi bunga pojok kanan bawah -->
+    <div class="bride-floral bride-floral--br">🌿🌸</div>
+
+    <!-- Hati dekorasi bawah -->
+    <div class="bride-bottom-heart">❤</div>
 
 </div>
+
+<script>
+    // Sesuaikan background modal-content agar match dengan desain bride popup
+    const mc = document.querySelector('.modal-content');
+    if (mc) {
+        mc.style.background = '#fdf0eb';
+        mc.style.padding = '0';
+    }
+</script>
