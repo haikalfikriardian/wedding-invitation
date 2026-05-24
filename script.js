@@ -57,6 +57,9 @@ function initDynamicContent() {
     const lightboxImg = document.getElementById("lightbox-img");
 
     if (galleryItems.length && lightbox && lightboxImg) {
+        // Pindahkan lightbox ke luar modal agar fullscreen di iOS Safari
+        document.body.appendChild(lightbox);
+
         galleryItems.forEach(item => {
             item.onclick = () => {
                 lightboxImg.src = item.src;
