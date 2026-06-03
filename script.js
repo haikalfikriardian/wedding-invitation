@@ -588,76 +588,22 @@ document.addEventListener("click", (e) => {
 });
 
 // =======================
-// 🎬 CREDIT SCENE
+// 🎬 CREDIT SCENE (Manual Scroll)
 // =======================
 (function () {
     const overlay  = document.getElementById('creditOverlay');
-    const content  = document.getElementById('creditScrollContent');
+    const viewport = overlay ? overlay.querySelector('.credit-viewport') : null;
     const closeBtn = document.getElementById('creditCloseBtn');
 
-    if (!overlay || !content || !closeBtn) return;
+    if (!overlay || !viewport || !closeBtn) return;
 
-    const SPEED = 55; // px per detik
-    let isScrolling = false;
-    let isPaused    = false;
-
-
-    // ── Reset ke posisi awal ──
-    function resetScroll() {
-        content.style.transition = 'none';
-        content.style.transform  = 'translateY(0)';
-        isScrolling = false;
-        isPaused    = false;
-    }
-
-    // ── Ambil nilai translateY saat ini dari computed style ──
-    function getCurrentY() {
-        const matrix = window.getComputedStyle(content).transform;
-        if (!matrix || matrix === 'none') return 0;
-        return new DOMMatrix(matrix).m42; // m42 = translateY
-    }
-
-    // ── Mulai scroll dari posisi saat ini ──
-    function startScrollFrom(currentY) {
-        const targetY  = -content.scrollHeight;
-        const distance = Math.abs(targetY - currentY);
-        const duration = distance / SPEED;
-
-        // Paksa reflow agar transition tidak langsung di-skip
-        content.getBoundingClientRect();
-
-        content.style.transition = `transform ${duration}s linear`;
-        content.style.transform  = `translateY(${targetY}px)`;
-        isScrolling = true;
-    }
-
-    // ── Pause: freeze di posisi sekarang ──
-    function pauseScroll() {
-        if (!isScrolling || isPaused) return;
-        const currentY = getCurrentY();
-        content.style.transition = 'none';
-        content.style.transform  = `translateY(${currentY}px)`;
-        isPaused = true;
-    }
-
-    // ── Resume: lanjut dari posisi beku ──
-    function resumeScroll() {
-        if (!isPaused) return;
-        isPaused = false;
-        const currentY = getCurrentY();
-        // Pakai requestAnimationFrame agar transition terapply setelah 'none'
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => startScrollFrom(currentY));
-        });
-    }
-
-    // ── Buka overlay & mulai ──
+    // ── Buka overlay & scroll ke atas ──
     document.addEventListener('click', function (e) {
         if (e.target.closest('#readStoryBtn')) {
             e.stopPropagation();
-            resetScroll();
             overlay.classList.remove('hidden');
-            setTimeout(() => startScrollFrom(0), 500);
+            // Reset ke posisi paling atas
+            viewport.scrollTop = 0;
         }
     });
 
@@ -665,37 +611,12 @@ document.addEventListener("click", (e) => {
     closeBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         overlay.classList.add('hidden');
-        resetScroll();
+        viewport.scrollTop = 0;
     });
 
-    // ── Touch: tahan = pause, lepas = resume ──
-    overlay.addEventListener('touchstart', function (e) {
-        // Jangan pause kalau yang ditekan adalah tombol close
-        if (e.target.closest('#creditCloseBtn')) return;
-        pauseScroll();
+    // Cegah event scroll di viewport agar tidak menutup atau terinterferensi
+    viewport.addEventListener('touchmove', function (e) {
+        e.stopPropagation();
     }, { passive: true });
 
-    overlay.addEventListener('touchend', function (e) {
-        if (e.target.closest('#creditCloseBtn')) return;
-        resumeScroll();
-    }, { passive: true });
-
-    overlay.addEventListener('touchcancel', function () {
-        resumeScroll();
-    }, { passive: true });
-
-    // ── Mouse: tahan = pause, lepas = resume (untuk desktop/emulator) ──
-    overlay.addEventListener('mousedown', function (e) {
-        if (e.target.closest('#creditCloseBtn')) return;
-        pauseScroll();
-    });
-
-    overlay.addEventListener('mouseup', function (e) {
-        if (e.target.closest('#creditCloseBtn')) return;
-        resumeScroll();
-    });
-
-    overlay.addEventListener('mouseleave', function () {
-        resumeScroll();
-    });
 })();

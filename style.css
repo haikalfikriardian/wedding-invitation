@@ -2062,26 +2062,29 @@ body {
     width: 100%;
     max-width: 360px;
     height: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     padding: 0 28px;
     box-sizing: border-box;
+    scrollbar-width: none; /* Firefox */
+}
+
+.credit-viewport::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
 }
 
 /* ── Konten scroll ── */
 .credit-scroll-content {
-    will-change: transform;
-    /* Awal: translateY(0), digerakkan JS */
+    /* Konten mengalir normal, di-scroll manual */
 }
 
-/* Spacer agar teks mulai dari bawah layar */
+/* Spacer atas kecil agar ada ruang nafas */
 .credit-spacer-top {
-    height: 100vh;
-    height: 100dvh;
+    height: 32px;
 }
 
 .credit-spacer-bottom {
-    height: 60vh;
-    height: 60dvh;
+    height: 60px;
 }
 
 /* ── Judul chapter ── */
